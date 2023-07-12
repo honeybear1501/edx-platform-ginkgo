@@ -85,7 +85,7 @@ from common.djangoapps.xblock_django.constants import (
 )
 from xmodule.lti_2_util import LTI20BlockMixin, LTIError
 from xmodule.raw_block import EmptyDataRawMixin
-from xmodule.util.xmodule_django import add_webpack_to_fragment
+from xmodule.util.builtin_assets import add_webpack_js_to_fragment, add_sass_to_fragment
 from xmodule.xml_block import XmlMixin
 from xmodule.x_module import (
     HTMLSnippet,
@@ -378,11 +378,6 @@ class LTIBlock(
         ],
         'xmodule_js': resource_filename(__name__, 'js/src/xmodule.js'),
     }
-    preview_view_css = {
-        'scss': [
-            resource_filename(__name__, 'css/lti/lti.scss')
-        ],
-    }
 
     mako_template = 'widgets/metadata-only-edit.html'
 
@@ -392,9 +387,6 @@ class LTIBlock(
             resource_filename(__name__, 'js/src/raw/edit/metadata-only.js')
         ],
         'xmodule_js': resource_filename(__name__, 'js/src/xmodule.js'),
-    }
-    studio_view_css = {
-        'scss': [],
     }
 
     def studio_view(self, _context):
@@ -407,7 +399,8 @@ class LTIBlock(
         fragment = Fragment(
             self.runtime.service(self, 'mako').render_template(self.mako_template, context)
         )
-        add_webpack_to_fragment(fragment, 'LTIBlockStudio')
+        add_sass_to_fragment(fragment, 'LTIBlockEditor.scss')
+        add_webpack_js_to_fragment(fragment, 'LTIBlockEditor')
         shim_xmodule_js(fragment, self.studio_js_module_name)
         return fragment
 
@@ -522,7 +515,7 @@ class LTIBlock(
         """
         fragment = Fragment()
         fragment.add_content(self.runtime.service(self, 'mako').render_template('lti.html', self.get_context()))
-        add_webpack_to_fragment(fragment, 'LTIBlockPreview')
+        add_webpack_js_to_fragment(fragment, 'LTIBlockDisplay')
         shim_xmodule_js(fragment, 'LTI')
         return fragment
 

@@ -19,7 +19,7 @@ from xmodule.mako_block import MakoTemplateBlockBase
 from xmodule.modulestore.exceptions import ItemNotFoundError
 from xmodule.seq_block import SequenceMixin
 from xmodule.studio_editable import StudioEditableBlock
-from xmodule.util.xmodule_django import add_webpack_to_fragment
+from xmodule.util.builtin_assets import add_webpack_js_to_fragment
 from xmodule.validation import StudioValidation, StudioValidationMessage
 from xmodule.xml_block import XmlMixin
 from xmodule.x_module import (
@@ -154,18 +154,12 @@ class ConditionalBlock(
         ],
         'xmodule_js': resource_filename(__name__, 'js/src/xmodule.js'),
     }
-    preview_view_css = {
-        'scss': [],
-    }
 
     mako_template = 'widgets/metadata-edit.html'
     studio_js_module_name = 'SequenceDescriptor'
     studio_view_js = {
         'js': [resource_filename(__name__, 'js/src/sequence/edit.js')],
         'xmodule_js': resource_filename(__name__, 'js/src/xmodule.js'),
-    }
-    studio_view_css = {
-        'scss': [],
     }
 
     # Map
@@ -239,7 +233,7 @@ class ConditionalBlock(
         """
         fragment = Fragment()
         fragment.add_content(self.get_html())
-        add_webpack_to_fragment(fragment, 'ConditionalBlockPreview')
+        add_webpack_js_to_fragment(fragment, 'ConditionalBlockDisplay')
         shim_xmodule_js(fragment, 'Conditional')
         return fragment
 
@@ -273,7 +267,7 @@ class ConditionalBlock(
         fragment = Fragment(
             self.runtime.service(self, 'mako').render_template(self.mako_template, self.get_context())
         )
-        add_webpack_to_fragment(fragment, 'ConditionalBlockStudio')
+        add_webpack_js_to_fragment(fragment, 'ConditionalBlockEditor')
         shim_xmodule_js(fragment, self.studio_js_module_name)
         return fragment
 

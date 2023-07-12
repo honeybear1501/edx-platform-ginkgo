@@ -23,7 +23,7 @@ from xblock.exceptions import NoSuchServiceError
 from xblock.fields import Boolean, Integer, List, Scope, String
 
 from edx_toggles.toggles import WaffleFlag, SettingDictToggle
-from xmodule.util.xmodule_django import add_webpack_to_fragment
+from xmodule.util.builtin_assets import add_webpack_js_to_fragment, add_sass_to_fragment
 from xmodule.x_module import (
     HTMLSnippet,
     ResourceTemplates,
@@ -278,21 +278,11 @@ class SequenceBlock(
         'xmodule_js': resource_filename(__name__, 'js/src/xmodule.js')
     }
 
-    preview_view_css = {
-        'scss': [
-            resource_filename(__name__, 'css/sequence/display.scss'),
-        ],
-    }
-
     # There is no studio_view() for this XBlock but this is needed to make the
     # the static_content command happy.
     studio_view_js = {
         'js': [],
         'xmodule_js': resource_filename(__name__, 'js/src/xmodule.js')
-    }
-
-    studio_view_css = {
-        'scss': []
     }
 
     def __init__(self, *args, **kwargs):
@@ -479,7 +469,8 @@ class SequenceBlock(
                 banner_text, special_html = special_html_view
                 if special_html and not masquerading_as_specific_student:
                     fragment = Fragment(special_html)
-                    add_webpack_to_fragment(fragment, 'SequenceBlockPreview')
+                    add_sass_to_fragment(fragment, 'SequenceBlockDisplay.scss')
+                    add_webpack_js_to_fragment(fragment, 'SequenceBlockDisplay')
                     shim_xmodule_js(fragment, 'Sequence')
                     return fragment
 
@@ -620,7 +611,8 @@ class SequenceBlock(
         self._capture_full_seq_item_metrics(children)
         self._capture_current_unit_metrics(children)
 
-        add_webpack_to_fragment(fragment, 'SequenceBlockPreview')
+        add_sass_to_fragment(fragment, 'SequenceBlockDisplay.scss')
+        add_webpack_js_to_fragment(fragment, 'SequenceBlockDisplay')
         shim_xmodule_js(fragment, 'Sequence')
         return fragment
 

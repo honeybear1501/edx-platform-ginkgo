@@ -1216,6 +1216,18 @@ OAUTH_EXPIRE_PUBLIC_CLIENT_DAYS = 30
 TPA_PROVIDER_BURST_THROTTLE = '10/min'
 TPA_PROVIDER_SUSTAINED_THROTTLE = '50/hr'
 
+# .. toggle_name: TPA_AUTOMATIC_LOGOUT_ENABLED
+# .. toggle_implementation: DjangoSetting
+# .. toggle_default: False
+# .. toggle_description: Redirect the user to the TPA logout URL if this flag is enabled, the
+#   TPA logout URL is configured, and the user logs in through TPA.
+# .. toggle_use_cases: opt_in
+# .. toggle_warning: Enabling this toggle skips rendering logout.html, which is used to log the user out
+#   from the different IDAs. To ensure the user is logged out of all the IDAs be sure to redirect
+#   back to <LMS>/logout after logging out of the TPA.
+# .. toggle_creation_date: 2023-05-07
+TPA_AUTOMATIC_LOGOUT_ENABLED = False
+
 ################################## TEMPLATE CONFIGURATION #####################################
 # Mako templating
 import tempfile  # pylint: disable=wrong-import-position,wrong-import-order
@@ -1619,7 +1631,7 @@ MODULESTORE = {
                     'DOC_STORE_CONFIG': DOC_STORE_CONFIG,
                     'OPTIONS': {
                         'default_class': 'xmodule.hidden_block.HiddenBlock',
-                        'fs_root': DATA_DIR,
+                        'fs_root': lambda settings: settings.DATA_DIR,
                         'render_template': 'common.djangoapps.edxmako.shortcuts.render_to_string',
                     }
                 },
@@ -1629,7 +1641,7 @@ MODULESTORE = {
                     'DOC_STORE_CONFIG': DOC_STORE_CONFIG,
                     'OPTIONS': {
                         'default_class': 'xmodule.hidden_block.HiddenBlock',
-                        'fs_root': DATA_DIR,
+                        'fs_root': lambda settings: settings.DATA_DIR,
                         'render_template': 'common.djangoapps.edxmako.shortcuts.render_to_string',
                     }
                 }
@@ -1637,6 +1649,7 @@ MODULESTORE = {
         }
     }
 }
+
 
 DATABASES = {
     # edxapp's edxapp-migrate scripts and the edxapp_migrate play
@@ -2702,7 +2715,6 @@ WEBPACK_LOADER = {
     'DEFAULT': {
         'BUNDLE_DIR_NAME': 'bundles/',
         'STATS_FILE': os.path.join(STATIC_ROOT, 'webpack-stats.json'),
-        'LOADER_CLASS': 'xmodule.util.xmodule_django.XModuleWebpackLoader',
     },
     'WORKERS': {
         'BUNDLE_DIR_NAME': 'bundles/',
@@ -2936,6 +2948,7 @@ YOUTUBE = {
     'TRANSCRIPTS': {
         'CAPTION_TRACKS_REGEX': r"captionTracks\"\:\[(?P<caption_tracks>[^\]]+)",
         'YOUTUBE_URL_BASE': 'https://www.youtube.com/watch?v=',
+        'ALLOWED_LANGUAGE_CODES': ["en", "en-US", "en-GB"],
     },
 
     'IMAGE_API': 'http://img.youtube.com/vi/{youtube_id}/0.jpg',  # /maxresdefault.jpg for 1920*1080
@@ -4464,6 +4477,7 @@ STUDENTMODULEHISTORYEXTENDED_OFFSET = 10000
 
 CREDENTIALS_SERVICE_USERNAME = 'credentials_service_user'
 CREDENTIALS_GENERATION_ROUTING_KEY = DEFAULT_PRIORITY_QUEUE
+CREDENTIALS_COURSE_COMPLETION_STATE = 'awarded'
 
 # Queue to use for award program certificates
 PROGRAM_CERTIFICATES_ROUTING_KEY = 'edx.lms.core.default'
@@ -4591,6 +4605,7 @@ ENTERPRISE_ALL_SERVICE_USERNAMES = [
     'enterprise_channel_worker',
     'enterprise_access_worker',
     'enterprise_subsidy_worker',
+    'subscriptions_worker'
 ]
 
 
@@ -4949,6 +4964,10 @@ DISCUSSIONS_MICROFRONTEND_URL = None
 # .. setting_default: None
 # .. setting_description: Base URL of the discussions micro-frontend google form based feedback.
 DISCUSSIONS_MFE_FEEDBACK_URL = None
+# .. setting_name: EXAMS_DASHBOARD_MICROFRONTEND_URL
+# .. setting_default: None
+# .. setting_description: Base URL of the exams dashboard micro-frontend for instructors.
+EXAMS_DASHBOARD_MICROFRONTEND_URL = None
 # .. toggle_name: ENABLE_AUTHN_RESET_PASSWORD_HIBP_POLICY
 # .. toggle_implementation: DjangoSetting
 # .. toggle_default: False
@@ -5328,6 +5347,8 @@ SUBSCRIPTIONS_API_PATH = f"{SUBSCRIPTIONS_ROOT_URL}/api/v1/stripe-subscription/"
 SUBSCRIPTIONS_LEARNER_HELP_CENTER_URL = None
 SUBSCRIPTIONS_BUY_SUBSCRIPTION_URL = f"{SUBSCRIPTIONS_ROOT_URL}/api/v1/stripe-subscribe/"
 SUBSCRIPTIONS_MANAGE_SUBSCRIPTION_URL = None
+SUBSCRIPTIONS_SERVICE_WORKER_USERNAME = 'subscriptions_worker'
 
 ############## NOTIFICATIONS EXPIRY ##############
 NOTIFICATIONS_EXPIRY = 60
+EXPIRED_NOTIFICATIONS_DELETE_BATCH_SIZE = 10000
