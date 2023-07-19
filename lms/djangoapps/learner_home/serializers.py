@@ -10,6 +10,8 @@ from django.urls import reverse
 from django.utils import timezone
 from opaque_keys.edx.keys import CourseKey
 from rest_framework import serializers
+from openedx_filters.exceptions import OpenEdxFilterException
+from openedx_filters.learning.filters import CourseIsStartedCreationStarted
 
 from common.djangoapps.course_modes.models import CourseMode
 from openedx.features.course_experience import course_home_url
@@ -243,6 +245,17 @@ class EnrollmentSerializer(serializers.Serializer):
 
     def get_hasOptedOutOfEmail(self, enrollment):
         return enrollment.course_id in self.context.get("course_optouts", [])
+
+    def to_representation(self, instance):
+        """Serialize the enrollment instance and update the 'hasStarted' field by applying filter."""
+        serialized_enrollment = super().to_representation(instance)
+        has_started = serialized_enrollment.get('hasStarted')
+        course_key, has_started = CourseIsStartedCreationStarted().run_filter(
+            course_key=instance.course_id,
+            is_started=has_started,
+        )
+        serialized_enrollment['hasStarted'] = has_started
+        return serialized_enrollment
 
 
 class GradeDataSerializer(serializers.Serializer):
