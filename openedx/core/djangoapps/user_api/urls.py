@@ -5,6 +5,7 @@ Defines the URL routes for this app.
 
 from django.conf import settings
 from django.urls import include, path, re_path
+from django.conf.urls import url
 from rest_framework import routers
 
 from ..profile_images.views import ProfileImageView
@@ -225,4 +226,15 @@ urlpatterns = [
     # Moved from user_api/legacy_urls.py
     path('v1/preferences/time_zones/', user_api_views.CountryTimeZoneListView.as_view(),
          ),
-]
+    ]
+
+# Provider States url for Account
+if getattr(settings, 'PROVIDER_STATES_URL', None):
+    from openedx.core.djangoapps.user_api.accounts.tests.pacts.views import provider_state as acc_provider_state
+    urlpatterns += [
+        url(
+            r'^pact/provider_states/$',
+            acc_provider_state,
+            name='acc-provider-state-view',
+        )
+    ]

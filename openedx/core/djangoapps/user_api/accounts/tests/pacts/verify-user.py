@@ -1,0 +1,33 @@
+import os
+import logging
+from django.test import LiveServerTestCase
+from django.urls import reverse
+from pact import Verifier
+log = logging.getLogger(__name__)
+logging.basicConfig(level=logging.DEBUG)
+PACT_DIR = os.path.dirname(os.path.realpath(__file__))
+PACT_FILE = "frontend-app-profile-edx-platform.json"
+
+class ProviderVerificationServer(LiveServerTestCase):
+    """ Live Server for Pact Account Verification """
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.PACT_URL = cls.live_server_url
+        cls.verifier = Verifier(
+            provider='edx-platform',
+            provider_base_url = cls.PACT_URL,
+        )
+    
+    @classmethod
+    def tearDownClass(cls):
+        super().tearDownClass()
+
+    def test_pact(self):
+        output, _ = self.verifier.verify_pacts(
+            os.path.join(PACT_DIR, PACT_FILE),
+            headers=['Pact-Authentication: Allow', ],
+            provider_states_setup_url=f"{self.PACT_URL}{reverse('acc-provider-state-view')}",
+        )
+        assert output == 0
