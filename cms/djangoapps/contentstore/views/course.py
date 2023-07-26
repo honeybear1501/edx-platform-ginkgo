@@ -38,6 +38,7 @@ from cms.djangoapps.course_creators.models import CourseCreator
 from cms.djangoapps.models.settings.course_grading import CourseGradingModel
 from cms.djangoapps.models.settings.course_metadata import CourseMetadata
 from cms.djangoapps.models.settings.encoder import CourseSettingsEncoder
+from cms.lib.ai_aside_summary import AiAsideSummary
 from common.djangoapps.course_action_state.managers import CourseActionStateItemNotFoundError
 from common.djangoapps.course_action_state.models import CourseRerunState, CourseRerunUIStateManager
 from common.djangoapps.edxmako.shortcuts import render_to_response
@@ -387,7 +388,8 @@ def _course_outline_json(request, course_block):
         course_outline=False if is_concise else True,  # lint-amnesty, pylint: disable=simplifiable-if-expression
         include_children_predicate=include_children_predicate,
         is_concise=is_concise,
-        user=request.user
+        user=request.user,
+        ai_aside_summary=AiAsideSummary(course_block.location.course_key),
     )
 
 
