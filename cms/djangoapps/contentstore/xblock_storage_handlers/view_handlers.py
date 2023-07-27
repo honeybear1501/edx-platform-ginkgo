@@ -1110,7 +1110,7 @@ def create_xblock_info(  # lint-amnesty, pylint: disable=too-many-statements
     )
 
     if not ai_aside_summary:
-        ai_aside_summary = AiAsideSummary(course.id)
+        ai_aside_summary = AiAsideSummary(xblock.location.course_key)
 
     if should_visit_children and xblock.has_children:
         child_info = _create_xblock_child_info(
