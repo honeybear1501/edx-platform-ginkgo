@@ -34,7 +34,7 @@ class AiAsideSummary:
         """
         Return the string representation of a CourseKey
         """
-        return str(self._course_key)
+        return self._course_key
 
     @cached_property
     def is_enabled(self):
@@ -43,7 +43,7 @@ class AiAsideSummary:
         """
         try:
             from ai_aside.waffle import summaries_configuration_enabled
-            return summaries_configuration_enabled(self._course_key)
+            return summaries_configuration_enabled(self.course_key)
         except ImportError:
             return False
 
