@@ -389,7 +389,6 @@ def _course_outline_json(request, course_block):
         include_children_predicate=include_children_predicate,
         is_concise=is_concise,
         user=request.user,
-        ai_aside_summary=AiAsideSummary(course_block.location.course_key),
     )
 
 

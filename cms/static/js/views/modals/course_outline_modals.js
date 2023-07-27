@@ -1260,7 +1260,7 @@ define(['jquery', 'backbone', 'underscore', 'gettext', 'js/views/baseview',
             };
             if (xblockInfo.isVertical()) {
                 editors = [StaffLockEditor, UnitAccessEditor, DiscussionEditor];
-                if (xblockInfo.get('summary_configuration_enabled') !== undefined) {
+                if (typeof xblockInfo.get('summary_configuration_enabled') === 'boolean') {
                     editors.push(SummaryConfigurationEditor);
                 }
             } else {
