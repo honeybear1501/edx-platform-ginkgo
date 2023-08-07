@@ -30,6 +30,7 @@ from lms.djangoapps.discussion import views as discussion_views
 from lms.djangoapps.discussion.config.settings import is_forum_daily_digest_enabled
 from lms.djangoapps.discussion.notification_prefs import views as notification_prefs_views
 from lms.djangoapps.instructor.views import instructor_dashboard as instructor_dashboard_views
+from lms.djangoapps.fx_score.views import score_dashboard as score_dashboard_views
 from lms.djangoapps.instructor_task import views as instructor_task_views
 from lms.djangoapps.staticbook import views as staticbook_views
 from lms.djangoapps.static_template_view import views as static_template_view_views
@@ -531,6 +532,15 @@ urlpatterns += [
         ),
         instructor_dashboard_views.instructor_dashboard_2,
         name='instructor_dashboard',
+    ),
+
+    # For the FUNiX score
+    re_path(
+        r'^courses/{}/score$'.format(
+            settings.COURSE_ID_PATTERN,
+        ),
+        score_dashboard_views,
+        name='score_dashboard',
     ),
 
     re_path(

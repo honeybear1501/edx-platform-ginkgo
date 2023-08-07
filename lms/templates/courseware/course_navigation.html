@@ -80,7 +80,13 @@ masquerading_as_student = is_masquerading_as_student(request.user, course.id)
                 %>
                 <ol class="tabs course-tabs">
                     <%include file="${tabs_tmpl}" args="tab_list=tab_list,active_page=active_page,default_tab=default_tab,tab_image=tab_image" />
+
                     <%block name="extratabs" />
+                    <li class="tab">
+                        <a href="/courses/course-v1:edX+DemoX+Demo_Course/score" class="">
+                            Score
+                        </a>
+                    </li>
                 </ol>
             </div>
         </nav>
