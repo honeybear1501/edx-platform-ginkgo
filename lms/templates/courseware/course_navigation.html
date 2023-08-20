@@ -82,8 +82,10 @@ masquerading_as_student = is_masquerading_as_student(request.user, course.id)
                     <%include file="${tabs_tmpl}" args="tab_list=tab_list,active_page=active_page,default_tab=default_tab,tab_image=tab_image" />
 
                     <%block name="extratabs" />
+
+                    <!-- FUNIX added 01/08/2023 -->
                     <li class="tab">
-                        <a href="/courses/course-v1:edX+DemoX+Demo_Course/score" class="">
+                        <a id="fx_score_tab" href="/courses/course_key/score" class="">
                             Score
                         </a>
                     </li>
@@ -92,3 +94,11 @@ masquerading_as_student = is_masquerading_as_student(request.user, course.id)
         </nav>
     % endif
 %endif
+
+<!-- FUNIX added 01/08/2023 -->
+<script type="text/javascript">
+    const pathname = window.location.pathname;
+    const course_key = pathname.split('/')[2];
+    const fx_tab = document.getElementById("fx_score_tab");
+    fx_tab.href = '/courses/' + course_key + '/score';
+</script>
