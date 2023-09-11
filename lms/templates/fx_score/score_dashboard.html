@@ -142,7 +142,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row" id="details-view">
       <div class="col-sm-12">
         <div class="card col-md-12 mt-4 mb-2">
           <div class="card-body">
@@ -183,11 +183,11 @@
         <div class="container mt-4">
           <div class="row">
             <div class="col-sm-6 col-md-4"><b>Thành phần điểm: </b></div>
-            <div class="col-sm-6 col-md-4">Assignment 3</div>
+            <div class="col-sm-6 col-md-4" id="submit-view-title"></div>
           </div>
           <div class="row mt-2">
             <div class="col-sm-6 col-md-4"><b>Email học viên:</b></div>
-            <div class="col-sm-6 col-md-4">MinhAnhFx20338@gmail.com</div>
+            <div class="col-sm-6 col-md-4" id="submit-view-email">MinhAnhFx20338@gmail.com</div>
           </div>
           <div class="row mt-3">
             <div class="col-sm-6 col-md-4">Option</div>
@@ -338,14 +338,21 @@
           console.log('Error in API');
       }
       if(action_buttons_array[0]){
-        action_buttons += 
-        `<button type="button" class="btn btn-primary" onclick="showViewPage()">
-            Xem
-        </button>`;
+        if(value.asssessment_type_title==="Assignment"){
+          action_buttons += 
+          `<button type="button" class="btn btn-primary" onclick="showViewPageForAsm()">
+              Xem
+          </button>`;
+        }else{
+          action_buttons += 
+          `<button type="button" class="btn btn-primary" onclick="showViewPage()">
+              Xem
+          </button>`;
+        }
       }
       if(action_buttons_array[1]){
         action_buttons += 
-        `<button type="button" class="btn btn-primary" onclick="showSubmitFilePage()">
+        `<button type="button" class="btn btn-primary" id="`+title+`" onclick="showSubmitFilePage(event)">
             Nộp bài
         </button>`;
       }
@@ -373,7 +380,7 @@
     }
   });
 
-  function showViewPage(){
+  function showViewPageForAsm(){
     
     const main_page = document.getElementById("main-page");
     main_page.style.display = 'none';
@@ -456,12 +463,88 @@
     });
   }
 
-  function showSubmitFilePage(){
+  function showViewPage(){
+    
+    const main_page = document.getElementById("main-page");
+    main_page.style.display = 'none';
+
+    const view_page = document.getElementById("view-page");
+    view_page.style.display = 'block';
+
+    fetch('http://51.79.153.64:3000/view_asm')
+    .then(res => res.json())
+    .then(data => {
+      try{
+        $('#title').append(data.asssessment_element_title);
+        $('#course-code').append(data.course_code);
+        $('#date-register').append(data.date_register+`<span>`+ data.time_register + `</span>`);
+        $('#datetime-interview').append(data.datetime_interview);
+        $('#review-times').append(data.Review_times+` \ `+data.Review_times_max);
+        $('#mentor-email').append(data.Mentor_email);
+        if(data.Option_selected){
+          $('#option').append(data.Option_selected);
+        }else{
+          $('#select-form').hide()
+        }
+        $('#mark').append(data.Mark);
+        $('#comment').append(data.Comment_Mentor);
+        let status_button;
+        switch(data.Status){
+          case 1:
+            status_button = 
+            `<button type="button" class="btn btn-primary">
+              Open
+            </button>`;
+            break;
+          case 2:
+            status_button = 
+            `<button type="button" class="btn btn-secondary">File Submitted</button>`;
+            break;
+          case 3:
+            status_button = 
+            `<button type="button" class="btn btn-info">
+              Submitted
+            </button>`;
+            break;
+          case 4:
+            status_button = 
+            `<button type="button" class="btn btn-primary">Assigned</button>`;
+            break;
+          case 5:
+            status_button = 
+            `<button type="button" class="btn btn-success">
+                Passed
+            </button>`;
+            break;
+          case 6:
+            status_button = 
+            `<button type="button" class="btn btn-danger">
+                Not Passed
+              </button>`;
+            break;
+          default:
+            console.log('Error in API');
+          }
+          $('#status-button').append(status_button);
+
+          const details_view = document.getElementById("details-view");
+          details_view.style.display = 'none';
+          
+      }catch(err){
+        console.log(err);
+      }
+    });
+  }
+
+  function showSubmitFilePage(event){
     const main_page = document.getElementById("main-page");
     main_page.style.display = 'none';
 
     const submit_file_page = document.getElementById("submit-file-page");
     submit_file_page.style.display = 'block';
+
+    const title = event.target.id;
+    $('#submit-view-title').append(title);
   }
 
   function showBookPage(){
