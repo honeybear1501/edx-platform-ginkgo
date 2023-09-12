@@ -87,7 +87,7 @@
             </div>
             <div class="row mt-3">
               <div class="col-sm-6 col-md-4"><b>Email học viên:</b></div>
-              <div class="col-sm-6 col-md-4">HVFx200@gmail.com</div>
+              <div class="col-sm-6 col-md-4"></div>
             </div>
             <div class="row mt-3">
               <div class="col-sm-6 col-md-4">
@@ -187,7 +187,7 @@
           </div>
           <div class="row mt-2">
             <div class="col-sm-6 col-md-4"><b>Email học viên:</b></div>
-            <div class="col-sm-6 col-md-4" id="submit-view-email">MinhAnhFx20338@gmail.com</div>
+            <div class="col-sm-6 col-md-4" id="submit-view-email">${user.email}</div>
           </div>
           <div class="row mt-3">
             <div class="col-sm-6 col-md-4">Option</div>
@@ -224,11 +224,11 @@
           <div class="container mt-4">
             <div class="row">
               <div class="col-sm-6 col-md-4"><b>Thành phần điểm: </b></div>
-              <div class="col-sm-6 col-md-4">Assignment 3</div>
+              <div class="col-sm-6 col-md-4" id="booking-view-title"></div>
             </div>
             <div class="row mt-2">
               <div class="col-sm-6 col-md-4"><b>Email học viên:</b></div>
-              <div class="col-sm-6 col-md-4">MinhAnhFx20338@gmail.com</div>
+              <div class="col-sm-6 col-md-4">${user.email}</div>
             </div>
             <div class="row mt-3">
               <div class="col-sm-6 col-md-4">Lần review:</div>
@@ -358,7 +358,7 @@
       }
       if(action_buttons_array[2]){
         action_buttons += 
-        `<button type="button" class="btn btn-primary" onclick="showBookPage()">
+        `<button type="button" class="btn btn-primary" id="`+title+`" onclick="showBookPage(event)">
             Đặt lịch
         </button>`;
       }
@@ -547,12 +547,15 @@
     $('#submit-view-title').append(title);
   }
 
-  function showBookPage(){
+  function showBookPage(event){
     const main_page = document.getElementById("main-page");
     main_page.style.display = 'none';
 
     const book_page = document.getElementById("book-page");
     book_page.style.display = 'block';
+
+    const title = event.target.id;
+    $('#booking-view-title').append(title);
   }
 
 </script>
