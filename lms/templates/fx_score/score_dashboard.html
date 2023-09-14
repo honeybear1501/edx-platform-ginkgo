@@ -234,10 +234,10 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">STT</th>
-                                <th scope="col">Thành phần điểm</th>
-                                <th scope="col">Trạng thái</th>
-                                <th scope="col">Hành động</th>
+                                <th scope="col" colspan="1">STT</th>
+                                <th scope="col" colspan="2">Thành phần điểm</th>
+                                <th scope="col" colspan="2">Trạng thái</th>
+                                <th scope="col" colspan="3">Hành động</th>
                             </tr>
                         </thead>
                         <tbody id="table-1-body"></tbody>
@@ -552,10 +552,10 @@
       }
       const template = 
         `<tr>
-          <th scope="row">`+(i+1)+`</th>
-          <td>`+title+`</td>
-          <td>`+status_button+`</td>
-          <td>
+          <th scope="row" colspan="1">`+(i+1)+`</th>
+          <td colspan="2">`+title+`</td>
+          <td colspan="2">`+status_button+`</td>
+          <td colspan="3">
             <div
               class="btn-group"
               role="group"
