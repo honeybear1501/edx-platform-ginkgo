@@ -24,6 +24,11 @@
     background: #fff;
     box-shadow: none !important;
   }
+  .button:hover {
+    background-color: #4CAF50 !important; /* Green */
+    pointer-events: none !important;
+  }
+  
   /* Reset some default styles */
   body,
   html,
@@ -250,7 +255,7 @@
 </div>
 
 <!-- Details View -->
-<div class="container" id="view-page" style="display: none;">
+<div class="container" id="view-page" style="display: none; padding: 0px;">
   <div class="card">
     <div class="card-body text-center">
       <h4 class="card-title">Xem thông tin bài nộp</h4>
@@ -266,34 +271,34 @@
         <div class="card">
           <div class="card-body">
             <div class="row">
-              <div class="col-sm-6 col-md-4"><b>Thành phần điểm: </b></div>
-              <div class="col-sm-6 col-md-4" id="title"></div>
+              <div class="col-sm-6 col-md-5"><b>Thành phần điểm: </b></div>
+              <div class="col-sm-6 col-md-5" id="title"></div>
             </div>
             <div class="row mt-2">
-              <div class="col-sm-6 col-md-4"><b>Môn học:</b></div>
-              <div class="col-sm-6 col-md-4" id="course-code"></div>
+              <div class="col-sm-6 col-md-5"><b>Môn học:</b></div>
+              <div class="col-sm-6 col-md-5" id="course-code"></div>
             </div>
             <div class="row mt-3">
-              <div class="col-sm-6 col-md-4"><b>Email học viên:</b></div>
-              <div class="col-sm-6 col-md-4"></div>
+              <div class="col-sm-6 col-md-5"><b>Email học viên:</b></div>
+              <div class="col-sm-6 col-md-4" id="student-email">${user.email}</div>
             </div>
             <div class="row mt-3">
-              <div class="col-sm-6 col-md-4">
+              <div class="col-sm-6 col-md-5">
                 <b>File nộp của học viên</b>
               </div>
-              <div class="col-sm-6 col-md-4">
+              <div class="col-sm-6 col-md-5">
                 <button type="button" class="btn btn-link">Link tải</button>
               </div>
             </div>
             <div class="row mt-3">
-              <div class="col-sm-6 col-md-4">
+              <div class="col-sm-6 col-md-5">
                 <b>Thời điểm đăng ký review:</b>
               </div>
-              <div class="col-sm-6 col-md-4" id="date-register"></div>
+              <div class="col-sm-6 col-md-5" id="date-register"></div>
             </div>
             <div class="row mt-3">
-              <div class="col-sm-6 col-md-4"><b>Thời điểm review</b></div>
-              <div class="col-sm-6 col-md-4" id="datetime-interview"></div>
+              <div class="col-sm-6 col-md-5"><b>Thời điểm review</b></div>
+              <div class="col-sm-6 col-md-5" id="datetime-interview"></div>
             </div>
           </div>
         </div>
@@ -302,28 +307,28 @@
         <div class="card">
           <div class="card-body">
             <div class="row mt-3">
-              <div class="col-sm-6 col-md-4"><b>Lần review:</b></div>
-              <div class="col-sm-6 col-md-4" id="review-times"></div>
+              <div class="col-sm-6 col-md-5"><b>Lần review:</b></div>
+              <div class="col-sm-6 col-md-5" id="review-times"></div>
             </div>
             <div class="row mt-3">
-              <div class="col-sm-6 col-md-4"><b>Email Mentor:</b></div>
-              <div class="col-sm-6 col-md-4" id="mentor-email"></div>
+              <div class="col-sm-6 col-md-5"><b>Email Mentor:</b></div>
+              <div class="col-sm-6 col-md-5" id="mentor-email"></div>
             </div>
             <div class="row mt-3" id="select-form">
-              <div class="col-sm-6 col-md-4"><b> Option đã chọn:</b></div>
-              <div class="col-sm-6 col-md-4" id="option"></div>
+              <div class="col-sm-6 col-md-5"><b> Option đã chọn:</b></div>
+              <div class="col-sm-6 col-md-5" id="option"></div>
             </div>
             <div class="row mt-3">
-              <div class="col-sm-6 col-md-4"><b>Điểm:</b></div>
-              <div class="col-sm-6 col-md-4" id="mark"></div>
+              <div class="col-sm-6 col-md-5"><b>Điểm:</b></div>
+              <div class="col-sm-6 col-md-5" id="mark"></div>
             </div>
             <div class="row mt-3">
-              <div class="col-sm-6 col-md-4"><b>Nhận xét:</b></div>
-              <div class="col-sm-6 col-md-4" id="comment"></div>
+              <div class="col-sm-6 col-md-5"><b>Nhận xét:</b></div>
+              <div class="col-sm-6 col-md-5" id="comment"></div>
             </div>
             <div class="row mt-3">
-              <div class="col-sm-6 col-md-4"><b>Trạng thái:</b></div>
-              <div class="col-sm-6 col-md-4" id="status-button">
+              <div class="col-sm-6 col-md-5"><b>Trạng thái:</b></div>
+              <div class="col-sm-6 col-md-5" id="status-button">
               </div>
             </div>
           </div>
@@ -339,12 +344,12 @@
               <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Trọng số</th>
-                    <th scope="col">Mô tả tiêu chí</th>
-                    <th scope="col">Điểm</th>
-                    <th scope="col">Nhận xét</th>
-                    <th scope="col">Tiêu chí bắt buộc?</th>
+                    <th scope="col" colspan="1">STT</th>
+                    <th scope="col" colspan="1">Trọng số</th>
+                    <th scope="col" colspan="3">Mô tả tiêu chí</th>
+                    <th scope="col" colspan="1">Điểm</th>
+                    <th scope="col" colspan="2">Nhận xét</th>
+                    <th scope="col" colspan="1">Tiêu chí bắt buộc?</th>
                   </tr>
                 </thead>
                 <tbody id="details">
@@ -582,9 +587,9 @@
       try{
         $('#title').append(data.asssessment_element_title);
         $('#course-code').append(data.course_code);
-        $('#date-register').append(data.date_register+`<span>`+ data.time_register + `</span>`);
+        $('#date-register').append(data.date_register+`<span>| `+ data.time_register + `</span>`);
         $('#datetime-interview').append(data.datetime_interview);
-        $('#review-times').append(data.Review_times+` \ `+data.Review_times_max);
+        $('#review-times').append(data.Review_times+"/"+data.Review_times_max);
         $('#mentor-email').append(data.Mentor_email);
         if(data.Option_selected){
           $('#option').append(data.Option_selected);
@@ -636,12 +641,12 @@
           details.forEach(function (value, i) {
             details_template +=
             `<tr>
-              <th scope="row">`+i+`</th>
-              <td>`+value.Weight+`</td>
-              <td>`+value.Criteria_desc+`</td>
-              <td>`+value.Criteria_Mark+`</td>
-              <td>`+value.Criteria_Comment+`</td>
-              <td>`+value.Mandatory+`</td>
+              <th scope="row" colspan="1">`+i+`</th>
+              <td colspan="1">`+value.Weight+`</td>
+              <td colspan="3">`+value.Criteria_desc+`</td>
+              <td colspan="1">`+value.Criteria_Mark+`</td>
+              <td colspan="2">`+value.Criteria_Comment+`</td>
+              <td colspan="1">`+value.Mandatory+`</td>
             </tr>`
           });
           $('#details').append(details_template);
@@ -665,9 +670,9 @@
       try{
         $('#title').append(data.asssessment_element_title);
         $('#course-code').append(data.course_code);
-        $('#date-register').append(data.date_register+`<span>`+ data.time_register + `</span>`);
+        $('#date-register').append(data.date_register+`<span>| `+ data.time_register + `</span>`);
         $('#datetime-interview').append(data.datetime_interview);
-        $('#review-times').append(data.Review_times+` \ `+data.Review_times_max);
+        $('#review-times').append(data.Review_times+"/"+data.Review_times_max);
         $('#mentor-email').append(data.Mentor_email);
         if(data.Option_selected){
           $('#option').append(data.Option_selected);
