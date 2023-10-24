@@ -262,7 +262,7 @@
       <h4 class="card-title">Xem thông tin bài nộp</h4>
     </div>
   </div>
-  <div class="container mt-4">
+  <div class="container mt-2">
     <div class="row">
       <div class="col-sm-6" style="float: left;">
         <div class="card">
@@ -630,6 +630,7 @@
           $('#status-button').append(status_button);
           const details = data.Criteria_detail;
           let details_template = '';
+          let i = 1;
           details.forEach(function (value, i) {
             details_template +=
             `<tr>
