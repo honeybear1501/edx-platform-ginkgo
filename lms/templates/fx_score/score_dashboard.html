@@ -448,7 +448,7 @@
 </div>
 
 <script type="text/javascript">
-  fetch('http://51.79.153.64:3000/asmList')
+  fetch('http://139.99.71.52:3000/asmList')
   .then(res => res.json())
   .then(data => {
     const list = data.assessment_element_list;
@@ -587,7 +587,7 @@
     const view_page = document.getElementById("view-page");
     view_page.style.display = 'block';
 
-    fetch('http://51.79.153.64:3000/view_asm')
+    fetch('http://139.99.71.52:3000/view_asm')
     .then(res => res.json())
     .then(data => {
       try{
@@ -657,7 +657,7 @@
     const view_page = document.getElementById("view-page");
     view_page.style.display = 'block';
 
-    fetch('http://51.79.153.64:3000/view_asm')
+    fetch('http://139.99.71.52:3000/view_asm')
     .then(res => res.json())
     .then(data => {
       try{
