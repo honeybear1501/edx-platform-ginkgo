@@ -262,7 +262,7 @@
       <h4 class="card-title">Xem thông tin bài nộp</h4>
     </div>
   </div>
-  <div class="container mt-4">
+  <div class="container mt-2">
     <div class="row">
       <div class="col-sm-6" style="float: left;">
         <div class="card">
@@ -284,7 +284,7 @@
                 <b>File nộp của học viên</b>
               </div>
               <div class="col-sm-6 col-md-5">
-                <button type="button" class="btn btn-link" id="download-link">Link tải</button>
+                <p><a class="link-offset-2 link-underline link-underline-opacity-0" href="https://cdn.theforage.com/vinternships/companyassets/MdKvo8dBLF8h9wCnx/boCQJL8iMAvgjLKmf/1665629767406/image%20(1).pdf" target="_blank">Link tải</a></p>
               </div>
             </div>
             <div class="row mt-3">
@@ -362,86 +362,88 @@
 
 <!-- Submit Files View -->
 <div class="container" id="submit-file-page" style="display: none;">
-  <div class="card">
-    <div class="card-body text-center">
-      <h5 class="card-title">Nộp file</h5>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    </div>
+  <div class="mt-4 text-center">
+    <h3>Nộp bài</h3>
   </div>
-  <div class="card mt-4">
+  <div class="card mt-4" style="margin: 0 auto; width: calc(100% - 50vh);">
     <div class="card-body">
-        <div class="container mt-4">
-          <div class="row">
+        <div class="row">
             <div class="col-sm-6 col-md-4"><b>Thành phần điểm: </b></div>
             <div class="col-sm-6 col-md-4" id="submit-view-title"></div>
-          </div>
-          <div class="row mt-2">
+        </div>
+        <div class="row mt-3">
             <div class="col-sm-6 col-md-4"><b>Email học viên:</b></div>
             <div class="col-sm-6 col-md-4" id="submit-view-email">${user.email}</div>
-          </div>
-          <div class="row mt-3">
+        </div>
+        <div class="row mt-3">
             <div class="col-sm-6 col-md-4">Option</div>
             <div class="col-sm-6 col-md-4">
-              <select class="form-select" aria-label="Default select example">
-                <option selected>Chọn option</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Chọn option</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
             </div>
-          </div>
-          <div class="row mt-2">
+        </div>
+        <div class="row mt-3">
             <div class="col-sm-6 col-md-4">File đính kèm</div>
             <div class="col-sm-6 col-md-4">
-              <input class="form-control" type="file" id="formFile">
+                <input class="form-control" type="file" id="formFile">
             </div>
-          </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-6 col-sm-3">
+                <button type="button" class="btn btn-warning btn-lg">Nộp bài</button>
+            </div>
         </div>
     </div>
-  </div>
+  </div> 
 </div>
 
 <!-- Booking Interview View -->
 <div class="container" id="book-page" style="display: none;">
-  <div class="card">
-    <div class="card-body text-center">
-      <h5 class="card-title">Đặt một lịch phiên review</h5>
+  <div class="mt-4 text-center">
+    <h3>Đặt một lịch phiên review</h3>
+  </div>
+  <div class="card mt-4" style="margin: 0 auto; width: calc(100% - 50vh);">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-6 col-md-4"><b>Thành phần điểm:</b> </div>
+        <div class="col-sm-6 col-md-4" id="booking-view-title"></div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-6 col-md-4"><b>Email học viên:</b></div>
+        <div class="col-6 col-md-4">${user.email}</div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-6 col-md-4"><b>Lần review:</b></div>
+        <div class="col-6 col-md-4">2/2</div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-6 col-md-4"><b>Thời gian Interview</b></div>
+        <div class="col-6 col-md-4">
+          <input id="datepicker" class="form-control" type="date">
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-6 col-md-4"><b>Chọn buổi (Nếu chọn Thứ 7)</b></div>
+        <div class="col-6 col-md-4">
+          <select class="form-select" aria-label="Chọn buổi">
+            <option> Chọn buổi</option>
+            <option value="1">Buổi sáng</option>
+            <option value="2">Buổi chiều</option>
+            <option value="3">Buổi tối</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-6 col-md-3">
+          <button type="button" class="btn btn-primary btn-lg mx-2">Đặt lịch</button>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="card mt-4">
-      <div class="card-body">
-          <div class="container mt-4">
-            <div class="row">
-              <div class="col-sm-6 col-md-4"><b>Thành phần điểm: </b></div>
-              <div class="col-sm-6 col-md-4" id="booking-view-title"></div>
-            </div>
-            <div class="row mt-2">
-              <div class="col-sm-6 col-md-4"><b>Email học viên:</b></div>
-              <div class="col-sm-6 col-md-4">${user.email}</div>
-            </div>
-            <div class="row mt-3">
-              <div class="col-sm-6 col-md-4">Lần review:</div>
-              <div class="col-sm-6 col-md-4">2/2</div>
-            </div>
-            <div class="row mt-2">
-              <div class="col-sm-6 col-md-4">Thời gian Interview</div>
-              <div class="col-sm-6 col-md-4">
-                  <button type="button" class="btn btn-light">Chọn ngày</button>
-              </div>
-            </div>
-            <div class="row mt-2">
-              <div class="col-sm-6 col-md-4">Thời buổi (Nếu chọn Thứ 7)</div>
-              <div class="col-sm-6 col-md-4">
-                  <button type="button" class="btn btn-light">Chọn buổi</button>
-              </div>
-            </div>
-          </div>
-      </div>
-  </div>
-  <div class="row mt-5">
-      <div class="col-6 col-sm-3">
-          <button type="button" class="btn btn-warning btn-lg mx-2">Đặt lịch</button>
-      </div>
   </div>
 </div>
 
@@ -628,6 +630,7 @@
           $('#status-button').append(status_button);
           const details = data.Criteria_detail;
           let details_template = '';
+          let i = 1;
           details.forEach(function (value, i) {
             details_template +=
             `<tr>
@@ -727,6 +730,11 @@
     $('#booking-view-title').append(title);
   }
 
+  $(document).ready(function () {
+    $('#datepicker').datepicker({
+      format: 'yyyy-mm-dd',
+    });
+  });
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
