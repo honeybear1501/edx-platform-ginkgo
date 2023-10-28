@@ -3,11 +3,11 @@
 <%namespace name='static' file='/static_content.html'/>
 <%inherit file="/main.html" />
 <%block name="bodyclass">score is-in-course course</%block>
-<%block name="pagetitle">${_("SCORE")}</%block>
+<%block name="pagetitle">${_("Submission")}</%block>
 <%static:css group='style-course'/>
 <%block name="headextra">
 </%block>
-<%include file="/courseware/course_navigation.html" args="active_page='score'" />
+<%include file="/courseware/course_navigation.html" args="active_page='submission'" />
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -219,6 +219,15 @@
           width: auto;
       }
   }
+
+  .padding-top-16 {
+    padding-top: 16px;
+  }
+
+  /* Fix underscore */
+  nav > a {
+    text-decoration: none !important;
+  }
 </style>
 
 <!-- Main View -->
@@ -241,9 +250,9 @@
                         <thead>
                             <tr>
                                 <th scope="col" colspan="1">STT</th>
-                                <th scope="col" colspan="2">Thành phần điểm</th>
-                                <th scope="col" colspan="2">Trạng thái</th>
-                                <th scope="col" colspan="3">Hành động</th>
+                                <th scope="col" colspan="3">Thành phần điểm</th>
+                                <th scope="col" colspan="3">Trạng thái</th>
+                                <th scope="col" colspan="4">Hành động</th>
                             </tr>
                         </thead>
                         <tbody id="table-1-body"></tbody>
@@ -448,6 +457,10 @@
 </div>
 
 <script type="text/javascript">
+  // active tab
+  $("#fx_score_tab").addClass("active");
+
+  // get data
   fetch('http://139.99.71.52:3000/asmList')
   .then(res => res.json())
   .then(data => {
@@ -563,10 +576,10 @@
       }
       const template = 
         `<tr>
-          <th scope="row" colspan="1">`+(i+1)+`</th>
-          <td colspan="2">`+title+`</td>
-          <td colspan="2">`+status_button+`</td>
-          <td colspan="3">
+          <th scope="row" colspan="1"><p style="margin-left: 8px;" class="padding-top-16">`+(i+1)+`</p></th>
+          <td colspan="3"><p class="padding-top-16">`+title+`</p></td>
+          <td colspan="3"><p>`+status_button+`</p></td>
+          <td colspan="4">
             <div
               class="btn-group"
               role="group"

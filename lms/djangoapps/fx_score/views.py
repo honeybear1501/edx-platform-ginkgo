@@ -22,8 +22,8 @@ class ScoreDashboardTab(CourseTab):
     """
     Defines the Score Dashboard view type that is shown as a course tab.
     """
-    type='score'
-    title = gettext_noop('Score')
+    type='submission'
+    title = gettext_noop('Submission')
     view_name = "score_dashboard"
     is_dynamic = True
 
