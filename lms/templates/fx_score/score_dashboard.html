@@ -630,11 +630,10 @@
           $('#status-button').append(status_button);
           const details = data.Criteria_detail;
           let details_template = '';
-          let i = 1;
           details.forEach(function (value, i) {
             details_template +=
             `<tr>
-              <th scope="row" colspan="1">`+i+`</th>
+              <th scope="row" colspan="1">`+ i +`</th>
               <td colspan="1">`+value.Weight+`</td>
               <td colspan="3">`+value.Criteria_desc+`</td>
               <td colspan="1">`+value.Criteria_Mark+`</td>
