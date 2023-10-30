@@ -365,6 +365,7 @@
           </div>
         </div>
       </div>
+      <button type="button" style="max-width: 150px;" onclick='backToMain(event)' class="btn btn-warning btn-lg">Trở lại</button>
     </div>
   </div>
 </div>
@@ -404,6 +405,7 @@
         <div class="row mt-3">
             <div class="col-6 col-sm-3">
                 <button type="button" class="btn btn-warning btn-lg">Nộp bài</button>
+                <button type="button" onclick='backToMain(event)' class="btn btn-warning btn-lg">Trở lại</button>
             </div>
         </div>
     </div>
@@ -450,6 +452,7 @@
       <div class="row mt-2">
         <div class="col-6 col-md-3">
           <button type="button" class="btn btn-primary btn-lg mx-2">Đặt lịch</button>
+          <button type="button" onclick='backToMain(event)' class="btn btn-warning btn-lg">Trở lại</button>
         </div>
       </div>
     </div>
@@ -741,6 +744,22 @@
 
     const title = event.target.id;
     $('#booking-view-title').append(title);
+  }
+
+  function backToMain(event){
+
+    const view_page = document.getElementById("view-page");
+    view_page.style.display = 'none';
+
+    const book_page = document.getElementById("book-page");
+    book_page.style.display = 'none';
+
+    const submit_file_page = document.getElementById("submit-file-page");
+    submit_file_page.style.display = 'none';
+
+    const main_page = document.getElementById("main-page");
+    main_page.style.display = 'block';
+
   }
 
   $(document).ready(function () {
