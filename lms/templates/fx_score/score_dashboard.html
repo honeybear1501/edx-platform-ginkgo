@@ -579,7 +579,7 @@
       }
       const template = 
         `<tr>
-          <th scope="row" colspan="1"><p style="margin-left: 8px;" class="padding-top-16">`+(i+1)+`</p></th>
+          <th scope="row" colspan="1"><p style="margin-left: 8px;" class="padding-top-16">`+(Number(i)+1)+`</p></th>
           <td colspan="3"><p class="padding-top-16">`+title+`</p></td>
           <td colspan="3"><p>`+status_button+`</p></td>
           <td colspan="4">
@@ -645,19 +645,20 @@
           }
           $('#status-button').append(status_button);
           const details = data.Criteria_detail;
+          console.log(details);
           let details_template = '';
-          let i = 1;
-          details.forEach(function (value, i) {
+          for(let i = 0; i < details.length; i++){
+            console.log(i);
             details_template +=
             `<tr>
-              <th scope="row" colspan="1">`+i+`</th>
-              <td colspan="1">`+value.Weight+`</td>
-              <td colspan="3">`+value.Criteria_desc+`</td>
-              <td colspan="1">`+value.Criteria_Mark+`</td>
-              <td colspan="2">`+value.Criteria_Comment+`</td>
-              <td colspan="1">`+value.Mandatory+`</td>
+              <th scope="row" colspan="1">`+Number(i+1)+`</th>
+              <td colspan="1">`+details[i].Weight+`</td>
+              <td colspan="3">`+details[i].Criteria_desc+`</td>
+              <td colspan="1">`+details[i].Criteria_Mark+`</td>
+              <td colspan="2">`+details[i].Criteria_Comment+`</td>
+              <td colspan="1">`+details[i].Mandatory+`</td>
             </tr>`
-          });
+          }
           $('#details').append(details_template);
       }catch(err){
         console.log(err);
@@ -748,17 +749,19 @@
 
   function backToMain(event){
 
-    const view_page = document.getElementById("view-page");
-    view_page.style.display = 'none';
+    // const view_page = document.getElementById("view-page");
+    // view_page.style.display = 'none';
 
-    const book_page = document.getElementById("book-page");
-    book_page.style.display = 'none';
+    // const book_page = document.getElementById("book-page");
+    // book_page.style.display = 'none';
 
-    const submit_file_page = document.getElementById("submit-file-page");
-    submit_file_page.style.display = 'none';
+    // const submit_file_page = document.getElementById("submit-file-page");
+    // submit_file_page.style.display = 'none';
 
-    const main_page = document.getElementById("main-page");
-    main_page.style.display = 'block';
+    // const main_page = document.getElementById("main-page");
+    // main_page.style.display = 'block';
+
+    location.reload();
 
   }
 
