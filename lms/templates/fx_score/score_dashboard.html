@@ -464,7 +464,7 @@
   $("#fx_score_tab").addClass("active");
 
   // get data
-  fetch('http://139.99.71.52:3000/asmList')
+  fetch('https://fake-api-submission-module.onrender.com/asmList')
   .then(res => res.json())
   .then(data => {
     const list = data.assessment_element_list;
@@ -603,7 +603,7 @@
     const view_page = document.getElementById("view-page");
     view_page.style.display = 'block';
 
-    fetch('http://139.99.71.52:3000/view_asm')
+    fetch('https://fake-api-submission-module.onrender.com/view_asm')
     .then(res => res.json())
     .then(data => {
       try{
@@ -674,7 +674,7 @@
     const view_page = document.getElementById("view-page");
     view_page.style.display = 'block';
 
-    fetch('http://139.99.71.52:3000/view_asm')
+    fetch('https://fake-api-submission-module.onrender.com/view_asm')
     .then(res => res.json())
     .then(data => {
       try{
