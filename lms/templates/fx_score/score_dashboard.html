@@ -100,7 +100,7 @@
       color: #fff;
   }
 
-  .btn-warning {
+  .btn-primary {
       background-color: #ffc107;
       color: #fff;
   }
@@ -365,7 +365,7 @@
           </div>
         </div>
       </div>
-      <button type="button" style="max-width: 150px;" onclick='backToMain(event)' class="btn btn-warning btn-lg">Trở lại</button>
+      <button type="button" style="max-width: 150px;" onclick='backToMain(event)' class="btn btn-primary btn-lg">Trở lại</button>
     </div>
   </div>
 </div>
@@ -404,8 +404,8 @@
         </div>
         <div class="row mt-3">
             <div class="col-6 col-sm-3">
-                <button type="button" class="btn btn-warning btn-lg">Nộp bài</button>
-                <button type="button" onclick='backToMain(event)' class="btn btn-warning btn-lg">Trở lại</button>
+                <button type="button" class="btn btn-primary btn-lg">Nộp bài</button>
+                <button type="button" onclick='backToMain(event)' class="btn btn-primary btn-lg">Trở lại</button>
             </div>
         </div>
     </div>
@@ -434,17 +434,14 @@
       <div class="row mt-2">
         <div class="col-6 col-md-4"><b>Thời gian Interview</b></div>
         <div class="col-6 col-md-4">
-          <input id="datepicker" class="form-control" type="date">
+          <input id="datepicker" class="form-control" type="date" onchange="datePickerHandel(event)">
         </div>
       </div>
       <div class="row mt-2">
         <div class="col-6 col-md-4"><b>Chọn buổi (Nếu chọn Thứ 7)</b></div>
         <div class="col-6 col-md-4">
-          <select class="form-select" aria-label="Chọn buổi">
-            <option> Chọn buổi</option>
-            <option value="1">Buổi sáng</option>
-            <option value="2">Buổi chiều</option>
-            <option value="3">Buổi tối</option>
+          <select id="select-time-interview" class="form-select" aria-label="Chọn buổi">
+            
           </select>
         </div>
       </div>
@@ -452,7 +449,7 @@
       <div class="row mt-2">
         <div class="col-6 col-md-3">
           <button type="button" class="btn btn-primary btn-lg mx-2">Đặt lịch</button>
-          <button type="button" onclick='backToMain(event)' class="btn btn-warning btn-lg">Trở lại</button>
+          <button type="button" onclick='backToMain(event)' class="btn btn-primary btn-lg">Trở lại</button>
         </div>
       </div>
     </div>
@@ -765,11 +762,27 @@
 
   }
 
-  $(document).ready(function () {
-    $('#datepicker').datepicker({
-      format: 'yyyy-mm-dd',
-    });
-  });
+  function datePickerHandel(event){
+    const selected_date_string = document.getElementById('datepicker').value;
+    const selected_date = new Date(selected_date_string);
+    $('#select-time-interview').empty()
+    if(selected_date.getDay()===6){
+      $('#select-time-interview').append(
+        `
+          <option value="1">Buổi sáng</option>
+          <option value="2">Buổi chiều</option>
+          <option value="3">Buổi tối</option>
+        `
+      )
+    }else{
+      $('#select-time-interview').append(
+        `
+          <option value="3">Buổi tối</option>
+        `
+      )
+    }
+  }
+
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
