@@ -85,7 +85,7 @@ masquerading_as_student = is_masquerading_as_student(request.user, course.id)
 
                     <!-- FUNIX added 01/08/2023 -->
                     <li class="tab">
-                        <a id="fx_score_tab" href="/courses/course_key/score" class="">
+                        <a id="fx_score_tab" href="/courses/course_key/submission" class="">
                             Submition
                         </a>
                     </li>
@@ -100,5 +100,5 @@ masquerading_as_student = is_masquerading_as_student(request.user, course.id)
     const pathname = window.location.pathname;
     const course_key = pathname.split('/')[2];
     const fx_tab = document.getElementById("fx_score_tab");
-    fx_tab.href = '/courses/' + course_key + '/score';
+    fx_tab.href = '/courses/' + course_key + '/submission';
 </script>

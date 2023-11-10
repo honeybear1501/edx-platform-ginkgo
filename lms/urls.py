@@ -536,7 +536,7 @@ urlpatterns += [
 
     # For the FUNiX score
     re_path(
-        r'^courses/{}/score$'.format(
+        r'^courses/{}/submission$'.format(
             settings.COURSE_ID_PATTERN,
         ),
         score_dashboard_views,
